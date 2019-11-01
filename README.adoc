@@ -1,0 +1,23 @@
+= Docker image for asciidoctor
+
+https://github.com/asciidoctor/docker-asciidoctor[公式イメージ] に https://github.com/chloerei/asciidoctor-pdf-cjk[asciidoctor-pdf-cjk] と https://github.com/chloerei/asciidoctor-pdf-cjk-kai_gen_gothic[asciidoctor-pdf-cjk-kai_gen_gothic] を追加した。
+
+== Build
+
+....
+$ docker build -t ishiy1993/asciidoctor .
+....
+
+== Usage
+Generate HTML with MathJax
+
+....
+docker run --rm -v ${PWD}:/documents/ -u ${UID}:${GID} ishiy1993/asciidoctor asciidoctor -a mathjax sample.adoc
+....
+
+Generate PDF
+
+....
+docker run --rm -v ${PWD}:/documents/ -u ${UID}:${GID} ishiy1993/asciidoctor asciidoctor-pdf -r asciidoctor-mathematical -a mathematical-format=svg -r asciidoctor-pdf-cjk -r asciidoctor-pdf-cjk-kai_gen_gothic -a pdf-style=/themes/jp-theme.yml sample.adoc
+....
+
